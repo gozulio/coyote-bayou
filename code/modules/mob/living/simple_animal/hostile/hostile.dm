@@ -949,6 +949,8 @@ mob/living/simple_animal/hostile/proc/DestroySurroundings() // for use with mega
 		return
 	if(!path_list)
 		path_list = AStar(src, target, /turf/proc/Distance, null, maximum_distance, minimum_distance)
+		if(!path_list) //if we didn't actually get a path do it the old way.
+			walk_to(src, target, minimum_distance, delay)
 	if(!actively_moving && path_list)
 		actively_moving = TRUE
 		process_moving(delay)
